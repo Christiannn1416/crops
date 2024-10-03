@@ -1,13 +1,18 @@
 <?php
-include ('seccion.class.php');
+require_once ('seccion.class.php');
+require_once ('invernadero.class.php');
+$appinvernadero = new Invernadero();
 $app=new Seccion();
 $accion = (isset($_GET['accion']))?$_GET['accion']:NULL;
 
 $id=(isset($_GET['id']))?$_GET['id']:null;
+
 switch($accion){
     case 'crear':
-        include("views/seccion/crear.php");
+        $invernaderos = $appinvernadero -> readAll();
+        require_once("views/seccion/crear.php");
         break;
+
     case 'nuevo':
         $data = $_POST['data'];
         $resultado = $app -> create($data);
@@ -19,11 +24,13 @@ switch($accion){
             $tipo = "danger";
         }
         $secciones = $app -> readAll();
-        include('views/seccion/index.php');
+        require_once('views/seccion/index.php');
         break;
+
     case 'actualizar':
         $secciones = $app -> readOne($id);
-        include('views/seccion/crear.php');
+        $invernaderos = $appinvernadero -> readAll();
+        require_once('views/seccion/crear.php');
         break;
 
     case 'modificar':
@@ -37,8 +44,9 @@ switch($accion){
             $tipo = "danger";
         }
         $secciones = $app -> readAll();
-        include('views/seccion/index.php');
+        require_once('views/seccion/index.php');
         break;  
+
     case 'eliminar':
         if(!is_null($id)){
             if(is_numeric($id)){
@@ -53,11 +61,11 @@ switch($accion){
             }
         }
         $secciones = $app -> readAll();
-        include("views/seccion/index.php");
+        require_once("views/seccion/index.php");
         break;
     default:
         $secciones = $app -> readAll();
-        include("views/seccion/index.php");
+        require_once("views/seccion/index.php");
 
 }
 ?>

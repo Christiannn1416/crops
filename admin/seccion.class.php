@@ -1,5 +1,5 @@
 <?php
-include ('../sistema.class.php');
+require_once ('../sistema.class.php');
 
 class Seccion extends Sistema{
     function create ($data) {
@@ -37,11 +37,13 @@ class Seccion extends Sistema{
     function delete($id) {
         $result=[];
         $this -> conexion();
-        $sql = "delete from seccion where id_seccion = :id_seccion";
-        $borrar = $this -> con -> prepare($sql);
-        $borrar -> bindParam(':id_seccion',$id,PDO::PARAM_INT);
-        $borrar -> execute();
-        $result = $borrar -> rowCount();
+        if(is_numeric($id)){
+            $sql = "delete from seccion where id_seccion = :id_seccion";
+            $borrar = $this -> con -> prepare($sql);
+            $borrar -> bindParam(':id_seccion',$id,PDO::PARAM_INT);
+            $borrar -> execute();
+            $result = $borrar -> rowCount();
+        }
         return $result;
     }
     function readOne($id) {
@@ -57,7 +59,7 @@ class Seccion extends Sistema{
     function readAll(){
         $this -> conexion();
         $result=[];
-        $query = "SELECT * FROM seccion";
+        $query = "SELECT s.*,i.invernadero FROM seccion s join invernadero i on s.id_invernadero = i.id_invernadero";
         $sql = $this -> con->prepare($query);
         $sql->execute();
         $result = $sql->fetchAll(PDO::FETCH_ASSOC);

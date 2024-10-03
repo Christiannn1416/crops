@@ -9,7 +9,7 @@
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Área</th>
-      <th scope="col">Id invernadero</th>
+      <th scope="col">Invernadero</th>
       <th scope="col">Opciones</th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
       <th scope="row"><?php echo $seccion['id_seccion']; ?> </th>
       <td><?php echo $seccion['seccion']; ?></td>
       <td><?php echo $seccion['area']; ?></td>
-      <td><?php echo $seccion['id_invernadero']; ?></td>
+      <td><?php echo $seccion['invernadero']; ?></td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <a href="seccion.php?accion=actualizar&id=<?php echo $seccion['id_seccion']; ?>" class="btn btn-primary" style="margin-right:1rem;">Actualizar</a>
