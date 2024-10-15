@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('config.class.php');
 class Sistema
 {
@@ -25,6 +26,11 @@ class Sistema
             $roles->bindParam(':correo', $correo, PDO::PARAM_STR);
             $roles->execute();
             $data = $roles->fetchAll(PDO::FETCH_ASSOC);
+            $roles = [];
+            foreach ($data as $rol) {
+                array_push($roles, $rol['rol']);
+            }
+            $data = $roles;
         }
         return $data;
     }
@@ -43,10 +49,58 @@ class Sistema
             $privilegio->bindParam(':correo', $correo, PDO::PARAM_STR);
             $privilegio->execute();
             $data = $privilegio->fetchAll(PDO::FETCH_ASSOC);
+            $permisos = [];
+            foreach ($data as $permiso) {
+                array_push($permisos, $permiso['permiso']);
+            }
+            $data = $permisos;
         }
         return $data;
     }
-    
+
+    function login($correo, $contrasena)
+    {
+        $contrasena = md5($contrasena);
+        $acceso = false;
+        if (filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+            $this->conexion();
+            $sql = "select * from usuario where correo=:correo and contrasena=:contrasena";
+            $sql = $this->con->prepare($sql);
+            $sql->bindParam(':correo', $correo, PDO::PARAM_STR);
+            $sql->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
+            $sql->execute();
+            $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+            if (isset($resultado[0])) {
+                $acceso = true;
+                $_SESSION['correo'] = $correo;
+                $_SESSION['validado'] = $acceso;
+                $roles = $this->getRol($correo);
+                $privilegios = $this->getPrivilegio($correo);
+                $_SESSION['roles'] = $roles;
+                $_SESSION['privilegios'] = $privilegios;
+                return $acceso;
+            }
+        }
+        $_SESSION['validado'] = false;
+        return $acceso;
+    }
+
+    function logout()
+    {
+        unset($_SESSION);
+        session_destroy();
+    }
+
+    function checkRol($rol)
+    {
+        $roles = $_SESSION['roles'];
+        if (!in_array($rol, $roles)) {
+            echo ('No tienes el rol');
+            die();
+        }
+    }
+
+
 
 }
 ?>
