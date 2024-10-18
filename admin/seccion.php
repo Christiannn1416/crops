@@ -1,71 +1,73 @@
 <?php
-require_once ('seccion.class.php');
-require_once ('invernadero.class.php');
+require_once('seccion.class.php');
+require_once('invernadero.class.php');
 $appinvernadero = new Invernadero();
-$app=new Seccion();
-$accion = (isset($_GET['accion']))?$_GET['accion']:NULL;
+$app = new Seccion();
+$app->checkRol('administrador');
+$accion = (isset($_GET['accion'])) ? $_GET['accion'] : NULL;
 
-$id=(isset($_GET['id']))?$_GET['id']:null;
+$id = (isset($_GET['id'])) ? $_GET['id'] : null;
 
-switch($accion){
+switch ($accion) {
     case 'crear':
-        $invernaderos = $appinvernadero -> readAll();
+        $invernaderos = $appinvernadero->readAll();
         require_once("views/seccion/crear.php");
         break;
 
     case 'nuevo':
         $data = $_POST['data'];
-        $resultado = $app -> create($data);
-        if($resultado){
+        $resultado = $app->create($data);
+        if ($resultado) {
             $mensaje = "La sección se ha agregado correctamente";
             $tipo = "success";
-        }else{
+        } else {
             $mensaje = "Ocurrió un error al agregar";
             $tipo = "danger";
         }
-        $secciones = $app -> readAll();
+        $secciones = $app->readAll();
         require_once('views/seccion/index.php');
         break;
 
     case 'actualizar':
-        $secciones = $app -> readOne($id);
-        $invernaderos = $appinvernadero -> readAll();
+        $secciones = $app->readOne($id);
+        $invernaderos = $appinvernadero->readAll();
         require_once('views/seccion/crear.php');
         break;
 
     case 'modificar':
         $data = $_POST['data'];
-        $resultado = $app -> update($id,$data);
-        if($resultado){
+        $resultado = $app->update($id, $data);
+        if ($resultado) {
             $mensaje = "La sección se ha actualizado correctamente";
             $tipo = "success";
-        }else{
+        } else {
             $mensaje = "Ocurrió un error al actualizar";
             $tipo = "danger";
         }
-        $secciones = $app -> readAll();
+        $secciones = $app->readAll();
         require_once('views/seccion/index.php');
-        break;  
+        break;
 
     case 'eliminar':
-        if(!is_null($id)){
-            if(is_numeric($id)){
-                $resultado = $app -> delete($id);
-                if($resultado){
+        if (!is_null($id)) {
+            if (is_numeric($id)) {
+                $resultado = $app->delete($id);
+                if ($resultado) {
                     $mensaje = "La sección se ha eliminado correctamente";
                     $tipo = "success";
-                }else{
+                } else {
                     $mensaje = "Ocurrió un error";
                     $tipo = "danger";
                 }
             }
         }
-        $secciones = $app -> readAll();
+        $secciones = $app->readAll();
         require_once("views/seccion/index.php");
         break;
     default:
-        $secciones = $app -> readAll();
+        $secciones = $app->readAll();
         require_once("views/seccion/index.php");
 
 }
+require_once('views/footer.php');
 ?>

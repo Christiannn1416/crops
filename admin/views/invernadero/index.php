@@ -1,7 +1,8 @@
-<?php require('views/header.php') ?>
+<?php require('views/header_admin.php') ?>
 <h1>Invernaderos</h1>
 <?php if (isset($mensaje)):
-  $app->alert($tipo, $mensaje); endif; ?>
+  $app->alert($tipo, $mensaje);
+endif; ?>
 <a href="invernadero.php?accion=crear" class="btn btn-success">Nuevo<a>
 
     <table class="table table-striped table-dark">

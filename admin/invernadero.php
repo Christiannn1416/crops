@@ -61,4 +61,5 @@ switch ($accion) {
         require_once("views/invernadero/index.php");
 
 }
+require_once('views/footer.php');
 ?>
