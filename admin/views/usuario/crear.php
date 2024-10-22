@@ -10,10 +10,10 @@ else:
     echo ('modificar&id=' . $id);
 endif; ?>" method="post">
     <div class="row mb-3">
-        <label for="usuario" class="col-sm-2 col-form-label">Nombre del usuario</label>
+        <label for="usuario" class="col-sm-2 col-form-label">Correo del usuario</label>
         <div class="col-sm-10">
-            <input type="text" name="data[usuario]" placeholder="Escribe aquí el nombre" class="form-control" value="<?php if (isset($usuarios['usuario'])):
-                echo ($usuarios['usuario']);
+            <input type="text" name="data[correo]" placeholder="Escribe aquí el nombre" class="form-control" value="<?php if (isset($usuario['correo'])):
+                echo ($usuario['correo']);
             endif; ?>" />
         </div>
     </div>
@@ -22,9 +22,9 @@ endif; ?>" method="post">
     <div class="row mb-3">
         <label for="fecha_creacion" class="col-sm-2 col-form-label">Contraseña</label>
         <div class="col-sm-10">
-            <input type="password" name="data[fecha_creacion]" placeholder="Escribe aquí la contraseña"
-                class="form-control" value="<?php if (isset($usuarios['fecha_creacion'])):
-                    echo ($usuarios['contrasena']);
+            <input type="password" name="data[contrasena]" placeholder="Escribe aquí la contraseña" class="form-control"
+                value="<?php if (isset($usuario['contrasena'])):
+                    echo ($usuario['contrasena']);
                 endif; ?>" />
         </div>
     </div>
