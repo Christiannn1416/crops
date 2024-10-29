@@ -31,7 +31,12 @@ endif; ?>" method="post">
     <?php foreach ($roles as $rol): ?>
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-                name="rol[<?php echo ($rol['id_rol']); ?>]">
+                name="rol[<?php echo ($rol['id_rol']); ?>]" <?php $checked = '';
+                   if (in_array($rol['id_rol'], $misroles)):
+                       $checked = 'checked';
+                   endif;
+                   echo ($checked);
+                   ?>>
             <label class="form-check-label" for="flexSwitchCheckDefault"><?php echo $rol['rol']; ?></label>
         </div>
     <?php endforeach ?>

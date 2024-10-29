@@ -20,7 +20,6 @@ switch ($accion) {
             $tipo = "danger";
             require_once('views/header.php');
             $app->alert($tipo, $mensaje);
-
         }
         break;
 

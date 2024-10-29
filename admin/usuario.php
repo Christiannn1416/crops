@@ -10,12 +10,11 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : null;
 switch ($accion) {
     case 'crear':
         $roles = $approl->readAll();
+        $misroles = $app->readAllRoles($id);
         include 'views/usuario/crear.php';
         break;
     case 'nuevo':
         $data = $_POST;
-        //print_r($_POST);
-        //die();
         $resultado = $app->create($data);
         if ($resultado) {
             $mensaje = "El usuario se agregó correctamente";
@@ -30,10 +29,11 @@ switch ($accion) {
     case 'actualizar':
         $usuario = $app->readOne($id);
         $roles = $approl->readAll();
+        $misroles = $app->readAllRoles($id);
         include('views/usuario/crear.php');
         break;
     case 'modificar':
-        $data = $_POST['data'];
+        $data = $_POST;
         $resultado = $app->update($id, $data);
         if ($resultado) {
             $mensaje = "El usuario se actualizó correctamente";
