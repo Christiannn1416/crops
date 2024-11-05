@@ -12,8 +12,6 @@ switch ($accion) {
         require_once("views/empleado/crear.php");
         break;
     case 'nuevo':
-        move_uploaded_file($_FILES['fotografia']['tmp_name'], "C:\\xampp\\htdocs\\crops\\uploads\\" . $_FILES['fotografia']['name']);
-        echo ("El archivo se ha cargado");
         $data = $_POST['data'];
         $resultado = $app->create($data);
         if ($resultado) {

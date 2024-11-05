@@ -48,10 +48,7 @@ endif; ?>" method="post" enctype="multipart/form-data">
     <div class="row mb-3">
         <label for="fotografia" class="col-sm-2 col-form-label">Fotografía</label>
         <div class="col-sm-10">
-            <input type="text" name="data[fotografia]" placeholder="URL de la fotografía" class="form-control" value="<?php if (isset($empleado['fotografia'])):
-                echo ($empleado['fotografia']);
-            endif; ?>" />
-            <input type="file" name="fotografia" placeholder="URL de la fotografía" class="form-control" />
+            <input type="file" name="fotografia" placeholder="URL de la fotografía" class="form-control" value="" />
         </div>
     </div>
 

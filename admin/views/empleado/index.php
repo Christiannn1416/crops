@@ -21,7 +21,13 @@ endif; ?>
         <?php foreach ($empleados as $empleado): ?>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="<?php echo $empleado['fotografia']; ?>">
+                    <img src="<?php
+                    if (file_exists("../uploads/" . $empleado['fotografia'])) {
+                        echo ("../uploads/" . $empleado['fotografia']);
+                    } else {
+                        echo ("../uploads/default.png");
+                    }
+                    ?>" class="card-img-top w-50">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $empleado['primer_apellido']; ?></h5>
                         <p class="card-text"><?php echo $empleado['segundo_apellido']; ?></p>
