@@ -4,11 +4,13 @@
 else:
     echo ("Modificar ");
 endif; ?>empleado</h1>
+
 <form action="empleado.php?accion=<?php if ($accion == "crear"):
     echo ('nuevo');
 else:
     echo ('modificar&id=' . $id);
-endif; ?>" method="post">
+endif; ?>" method="post" enctype="multipart/form-data">
+
     <div class="row mb-3">
         <label for="empleado" class="col-sm-2 col-form-label">Primer Apellido</label>
         <div class="col-sm-10">
@@ -44,12 +46,12 @@ endif; ?>" method="post">
         </div>
     </div>
     <div class="row mb-3">
-        <label for="fotografia" class="col-sm-2 col-form-label">Fotografia</label>
+        <label for="fotografia" class="col-sm-2 col-form-label">Fotografía</label>
         <div class="col-sm-10">
-            <input type="text" name="data[fotografia]" placeholder="Escribe aquí el teléfono" class="form-control"
-                value="<?php if (isset($empleados['fotografia'])):
-                    echo ($empleados['fotografia']);
-                endif; ?>" />
+            <input type="text" name="data[fotografia]" placeholder="URL de la fotografía" class="form-control" value="<?php if (isset($empleado['fotografia'])):
+                echo ($empleado['fotografia']);
+            endif; ?>" />
+            <input type="file" name="fotografia" placeholder="URL de la fotografía" class="form-control" />
         </div>
     </div>
 
