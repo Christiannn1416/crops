@@ -104,7 +104,7 @@ class Empleado extends Sistema
                     $nombre = explode('.', $data['name']);
                     $imagen = md5($n . $nombre[0]) . "." . $nombre[sizeof($nombre) - 1];
                     $origen = $data['tmp_name'];
-                    $destino = "C:\\xampp\\htdocs\\crops\\uploads\\" . $imagen;
+                    $destino = "C:\\wamp64\\www\\crops\\uploads\\" . $imagen;
                     if (move_uploaded_file($origen, $destino)) {
                         return $imagen;
                     }
