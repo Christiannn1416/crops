@@ -11,6 +11,7 @@ switch ($accion) {
     case 'crear':
         $roles = $approl->readAll();
         $misroles = $app->readAllRoles($id);
+
         include 'views/usuario/crear.php';
         break;
     case 'nuevo':
