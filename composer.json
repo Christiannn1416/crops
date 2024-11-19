@@ -1,7 +1,6 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.9",
-        "spipu/html2pdf": "^5.2",
-        "chillerlan/php-qrcode": "^5.0"
+        "spipu/html2pdf": "^5.2"
     }
 }

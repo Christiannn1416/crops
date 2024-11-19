@@ -59,6 +59,10 @@ switch ($accion) {
         $empleados = $app->readAll();
         require_once("views/empleado/index.php");
         break;
+    case 'reporte':
+        $app->readOne($id);
+        $app->reporte($id);
+        break;
     default:
         $empleados = $app->readAll();
         require_once("views/empleado/index.php");

@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 require_once('../sistema.class.php');
-
-use chillerlan\QRCode\{QRCode, QROptions};
-use chillerlan\QRCode\Data\QRMatrix;
-use chillerlan\QRCode\Output\QRMarkupHTML;
 require_once '../vendor/autoload.php';
 use Spipu\Html2Pdf\Html2Pdf;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
@@ -92,24 +88,10 @@ class Seccion extends Sistema
         $consulta->execute();
         $data = $consulta->fetchAll(PDO::FETCH_ASSOC);
         try {
-            $options = new QROptions;
-
-            $options->version = 5;
-            $options->outputInterface = QRMarkupHTML::class;
-            $options->cssClass = 'qrcode';
-            $options->moduleValues = [
-                    // finder
-                QRMatrix::M_FINDER_DARK => '#A71111', // dark (true)
-                QRMatrix::M_FINDER_DOT => '#A71111', // finder dot, dark (true)
-                QRMatrix::M_FINDER => '#FFBFBF', // light (false)
-                    // alignment
-                QRMatrix::M_ALIGNMENT_DARK => '#A70364',
-                QRMatrix::M_ALIGNMENT => '#FFC9C9',
-            ];
-
-
-            $out = (new QRCode($options))->render('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-
+            include('../lib/phpqrcode/qrlib.php');
+            $id_factura = rand(1, 1000);
+            $file_name = '../qr/' . $id_factura . '.png';
+            QRcode::png('https://sourceforge.net/projects/phpqrcode/', $file_name, 2, 20, 2);
             header('Content-Type: text/html; charset=utf-8');
             ob_start();
             $content = ob_get_clean();

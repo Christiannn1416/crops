@@ -36,6 +36,8 @@ endif; ?>
                             class="btn btn-primary">Editar</a>
                         <a href="empleado.php?accion=eliminar&id=<?php echo $empleado['id_empleado']; ?>"
                             class="btn btn-danger">Eliminar</a>
+                        <a href="empleado.php?accion=reporte&id=<?php echo $empleado['id_empleado']; ?>"
+                            class="btn btn-info">Imprimir</a>
                     </div>
                 </div>
             </div>
