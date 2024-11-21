@@ -1,7 +1,7 @@
 <?php require('views/header_admin.php'); ?>
 <h1><?php echo ($accion == "crear") ? "Nuevo " : "Modificar "; ?>Permiso</h1>
 
-<form action="permisos.php?accion=<?php echo ($accion == "crear") ? 'nuevo' : 'modificar&id=' . $id; ?>" method="post">
+<form action="permiso.php?accion=<?php echo ($accion == "crear") ? 'nuevo' : 'modificar&id=' . $id; ?>" method="post">
     <div class="row mb-3">
         <label for="permiso" class="col-sm-2 col-form-label">Nombre del Permiso</label>
         <div class="col-sm-10">
