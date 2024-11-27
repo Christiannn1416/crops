@@ -131,7 +131,6 @@ class Seccion extends Sistema
             $html2pdf->output('ejemplo.pdf');
         } catch (Html2PdfException $e) {
             $html2pdf->clean();
-
             $formatter = new ExceptionFormatter($e);
             echo $formatter->getHtmlMessage();
         }

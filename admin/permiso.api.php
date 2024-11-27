@@ -11,26 +11,17 @@ $data = [];
 switch ($accion) {
     case 'POST':
         $datos = $_POST;
-        $resultado = $app->create($datos);
-        echo $resultado;
+        if (!is_null($id) && is_numeric($id)) {
+            $resultado = $app->update($id, $datos);
+        } else {
+            $resultado = $app->create($datos);
+        }
         if ($resultado == 1) {
-            $data['mensaje'] = "El permiso se agregó correctamente.";
+            $data['mensaje'] = "El permiso se guardó correctamente.";
         } else {
             $data['mensaje'] = "Ocurrió algún error.";
         }
         break;
-    /* case 'POST':
-        $data = $_POST['data'];
-        $resultado = $app->update($id, $data);
-        if ($resultado) {
-            $mensaje = "El permiso se actualizó correctamente";
-            $tipo = "success";
-        } else {
-            $mensaje = "Hubo un error al actualizar el permiso";
-            $tipo = "danger";
-        }
-        $permisos = $app->readAll();
-        break; */
     case 'DELETE':
         if (!is_null($id)) {
             if (is_numeric($id)) {
